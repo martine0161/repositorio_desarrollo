@@ -112,19 +112,19 @@ El **KPI primario** podría ser la tasa de errores **5xx**, donde el umbral debe
 
 ### HTTP - Contrato Observable
 
-**Captura**: `imagenes/http-evidencia.png`
+![Evidencia HTTP](imagenes/http-evidencia.png)
 
 En esta captura se observa el **método HTTP** (GET), el **código de estado** (200) y las cabeceras relevantes, como **Cache-Control** y **X-Request-ID**. Estas cabeceras son esenciales para el rendimiento y la trazabilidad de las solicitudes.
 
 ### DNS - Nombres y TTL
 
-**Captura**: `imagenes/dns-ttl.png`
+![Evidencia DNS](imagenes/dns-ttl.png)
 
 En esta captura se muestra el **TTL** de un dominio, lo cual es importante para el manejo de rollbacks y la propagación de cambios en la dirección IP de un servidor.
 
 ### TLS - Seguridad en Tránsito
 
-**Captura**: `imagenes/tls-cert.png`
+![Evidencia TLS](imagenes/tls-cert.png)
 
 Aquí se presenta el **CN** (Common Name) y el **SAN** (Subject Alternative Name) de un certificado, así como su **vigencia** y **emisora**, lo cual es crucial para validar la seguridad en el tránsito de datos.
 
