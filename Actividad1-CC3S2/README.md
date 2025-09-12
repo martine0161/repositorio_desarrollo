@@ -1,7 +1,7 @@
 # Actividad 1 - Introducción a DevOps y DevSecOps
 
 **Nombre:** Martin Centeno Leon  
-**Fecha:** 3 de setiembre del 2025  
+**Fecha:** Setiembre del 2025  
 
 ---
 
