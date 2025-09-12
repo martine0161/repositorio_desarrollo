@@ -152,7 +152,7 @@ Aquí se presenta el **CN** (Common Name) y el **SAN** (Subject Alternative Name
 
 ### Flujo de Cliente a Servicio Seguro
 
-**Captura**: `imagenes/arquitectura-minima.png`
+![Arquitectura DevSecOps](imagenes/arquitectura-minima.png)
 
 Este diagrama muestra el flujo de un cliente que realiza una solicitud a través de DNS, hacia un servicio HTTP protegido con TLS. Se aplican controles en cada capa para garantizar un despliegue seguro y reproducible.
 
@@ -163,16 +163,16 @@ Este diagrama muestra el flujo de un cliente que realiza una solicitud a través
 En esta sección, se muestran las capturas de las evidencias recolectadas en las comprobaciones realizadas:
 
 1. **HTTP - Método, código y cabeceras**:  
-   **Captura**: `imagenes/http-evidencia.png`
+   ![Evidencia HTTP](imagenes/http-evidencia.png)
 
 2. **DNS - Tipo de registro y TTL**:  
-   **Captura**: `imagenes/dns-ttl.png`
+   ![Evidencia DNS](imagenes/dns-ttl.png)
 
 3. **TLS - CN/SAN, vigencia y emisora**:  
-   **Captura**: `imagenes/tls-cert.png`
+   ![Evidencia TLS](imagenes/tls-cert.png)
 
 4. **Puertos - Estado de runtime**:  
-   **Captura**: `imagenes/puertos.png`
+   ![Evidencia TLS](imagenes/puertos.png)
 
 ---
 
