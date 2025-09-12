@@ -36,18 +36,17 @@ En algunos contextos, un enfoque cercano a cascada sigue siendo razonable. Por e
 
 ---
 
-## 4.2 Ciclo Tradicional de Dos Pasos y Silos
+## 4.2 Ciclo Tradicional de Dos Pasos y Silos (Limitaciones y Anti-patrones)
 
-### Limitaciones del Ciclo Tradicional
+![Silos Organizacionales](imagenes/silos-equipos.jpg)
 
-El ciclo tradicional de desarrollo ("construcción -> operación") sin integración continua tiene varias limitaciones:
-- **Grandes lotes**: En lugar de realizar entregas pequeñas y frecuentes, los equipos trabajan en grandes lotes, lo que lleva a retrasos en la identificación y corrección de errores.
-- **Colas de defectos**: Los errores y defectos se acumulan, lo que genera cuellos de botella y retrabajo al final del ciclo.
+### Limitaciones:
+1. **Grandes Lotes**: Sin integración continua, los desarrollos y correcciones se agrupan, lo que puede generar largos tiempos de espera y aumentar el riesgo de introducir defectos.  
+2. **Colas de Defectos**: Los defectos son identificados tarde, lo que lleva a retrasos significativos en la entrega y mayor costo de corrección.
 
-### Anti-patrones
-
-- **"Throw over the wall"**: Este anti-patrón ocurre cuando los equipos de desarrollo y operaciones no se comunican efectivamente, lo que lleva a que los defectos no se detecten hasta que el producto es entregado.
-- **Seguridad como auditoría tardía**: Implementar prácticas de seguridad solo al final del ciclo de vida del software, lo que aumenta el riesgo de vulnerabilidades críticas no detectadas.
+### Anti-patrones:
+1. **Throw Over the Wall**: Los desarrolladores terminan su parte sin coordinación con el equipo de operaciones, lo que genera incompatibilidades entre lo que se desarrolló y lo que se puede operar.
+2. **Seguridad como Auditoría Tardía**: La seguridad se revisa solo en fases finales, lo que puede permitir que vulnerabilidades críticas se detecten solo cuando el software ya está en producción.
 
 ---
 
