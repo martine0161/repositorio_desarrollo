@@ -1,4 +1,3 @@
-```markdown
 # Actividad 2: HTTP, DNS, TLS y 12-Factor (port binding, configuración, logs)
 
 ## Objetivo

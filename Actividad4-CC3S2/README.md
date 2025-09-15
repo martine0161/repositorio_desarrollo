@@ -5,7 +5,7 @@
 - **Archivos generados**: `etc_lista.txt`, `test.txt`, `lista_conf.txt`, `mayus.txt`, `errores.log`
 
 ## Comandos Ejecutados
-```bash
+
 # Sección 1: Manejo sólido de CLI
 pwd
 cd /tmp
@@ -58,7 +58,7 @@ sudo journalctl -t sshd -t sudo --since today | awk '{print $1,$2,$3,$5}' | sort
 
 ## Resultados Clave
 
-```bash
+
 # Conteo de archivos en /tmp
 find /tmp -maxdepth 1 -type f \( -name '*.txt' -o -name '*.doc' \) | wc -l
 # Resultado: 2
