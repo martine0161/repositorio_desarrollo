@@ -124,6 +124,22 @@ El objetivo de esta actividad es practicar despliegues seguros y reproducibles c
 
 ## Capturas de pantalla
 
-- **Captura 1**: Salida de `curl -v http://127.0.0.1:8080/`
-- **Captura 2**: Salida de `curl -i -X POST http://127.0.0.1:8080/`
-- **Captura 3**: Configuración de Nginx y los logs de Nginx
+### 1. Captura de la salida de `curl` al acceder a la aplicación Flask
+Esta captura muestra cómo la aplicación Flask responde a la solicitud GET desde `curl` en la dirección `http://127.0.0.1:8080/`.
+
+![Curl Output](imagenes/curl1.jpg)
+
+### 2. Captura del error al intentar usar el método POST en la aplicación Flask
+Se muestra el error recibido al intentar hacer una solicitud POST sin la ruta correspondiente.
+
+![POST Error](imagenes/curl2.jpg)
+
+### 3. Captura de la respuesta exitosa del `ping` a `miapp.local`
+Este `ping` confirma que `miapp.local` se resolvió correctamente a `127.0.0.1`, indicando que el archivo **hosts** está configurado correctamente.
+
+![Ping miapp.local](imagenes/hosts.jpg)
+
+### 4. Captura de la configuración del archivo **hosts**
+Aquí se muestra cómo se configuró el archivo **hosts** en Windows para resolver `miapp.local` a `127.0.0.1`.
+
+![Hosts File Configuration](imagenes/miapplocal.jpg)
