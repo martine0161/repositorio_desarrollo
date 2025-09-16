@@ -2,125 +2,128 @@
 
 ## Objetivo
 
-Practicar despliegues **seguros y reproducibles** combinando aplicación (HTTP), resolución de nombres (DNS), cifrado en tránsito (TLS) y buenas prácticas **12-Factor** (variables de entorno, port binding y logs a stdout).
+El objetivo de esta actividad es practicar despliegues seguros y reproducibles combinando aplicaciones (HTTP), resolución de nombres (DNS), cifrado en tránsito (TLS), y buenas prácticas **12-Factor** (variables de entorno, port binding y logs a stdout).
 
-## Archivos base (proyecto elemental)
+## Archivos
 
-* **Aplicación** Flask con `PORT`, `MESSAGE`, `RELEASE` por variables de entorno, expone `/` y registra logs en **stdout**.
-* **Guía/Make (paso a paso Linux y WSL)** con objetivos `make` para hosts, TLS, Nginx, chequeos y demo DNS.
-* **Nginx**: terminación TLS en `:443` y proxy a `127.0.0.1:8080` (redirección HTTP->HTTPS opcional).
+- **`app.py`**: Aplicación Flask que expone una API en el puerto configurado por la variable de entorno `PORT`. Responde con un mensaje y versión definidos por las variables de entorno `MESSAGE` y `RELEASE`.
+- **`Makefile`** (opcional): Contiene comandos para facilitar la ejecución de configuraciones en entornos Linux o WSL.
+- **`REPORT.md`**: Reporte con evidencias de las pruebas realizadas y respuestas a las preguntas guía.
+- **Capturas de pantalla**: Archivos de imagen que muestran la terminal con la salida de las pruebas.
 
-## Entregables (en tu repositorio personal)
+## Requisitos previos
 
-Sube una carpeta **`Actividad2-CC3S2/`** con:
+1. Tener **Python 3** instalado en tu máquina.
+2. Crear un entorno virtual y activar el entorno virtual (opcional pero recomendado).
+3. Instalar las dependencias de Flask con `pip install flask`.
+4. Para realizar la parte de TLS, necesitarás tener instalado **Nginx** y **OpenSSL**.
 
-- `REPORT.md` (evidencias y respuestas), 2) capturas de terminal (o *logs* en texto), 3) cualquier ajuste propuesto al código/configuración, 4) un **Makefile** y/o scripts que permitan repetir tu flujo localmente (si usas WSL, documenta diferencias). Referencia comandos exactos usados.
+## Instrucciones
 
-## Actividades y evidencias
+### Levantar la aplicación
 
-### 1) HTTP: Fundamentos y herramientas
+1. **Crear el entorno virtual (opcional):**
 
-**Meta:** ver anatomía petición/respuesta, métodos y códigos.
+    ```bash
+    python -m venv venv
+    .\venv\Scripts\activate  # En PowerShell
+    ```
 
-1. **Levanta la app** con variables de entorno (12-Factor):
-   `PORT=8080 MESSAGE="Hola CC3S2" RELEASE="v1" python3 app.py` (usa tu *venv*). La app **escucha** en el puerto indicado y **loggea en stdout**. Incluye extracto de salida (stdout) en el reporte.
+2. **Instalar Flask**:
 
-3. **Inspección con `curl`:**
+    ```bash
+    pip install flask
+    ```
 
-   * `curl -v http://127.0.0.1:8080/` (cabeceras, código de estado, cuerpo JSON).
-   * `curl -i -X POST http://127.0.0.1:8080/` (explica qué ocurre si no hay ruta/método).
-   * **Pregunta guía:** ¿Qué campos de respuesta cambian si actualizas `MESSAGE`/`RELEASE` sin reiniciar el proceso? Explica por qué.
+3. **Ejecutar la aplicación Flask** con las variables de entorno:
 
-4. **Puertos abiertos con `ss`:**
+    ```bash
+    $env:PORT=8080; $env:MESSAGE="Hola CC3S2"; $env:RELEASE="v1"; python app.py  # En PowerShell
+    ```
 
-   * `ss -ltnp | grep :8080` (evidencia del proceso y socket).
+4. La aplicación debería estar disponible en `http://127.0.0.1:8080/` o `http://192.168.x.x:8080`.
 
-5. **Logs como flujo:** Demuestra que los logs salen por stdout (pega 2–3 líneas). Explica por qué **no** se escriben en archivo (12-Factor).
+### Pruebas con `curl`
 
-> Herramientas: `curl`, `ss`, `lsof` (opcional para PID/FD), `journalctl` (si corres como servicio).
+- **Ver respuesta GET:**
 
-### 2) DNS: nombres, registros y caché
+    ```bash
+    curl -v http://127.0.0.1:8080/
+    ```
 
-**Meta:** resolver `miapp.local` y observar TTL/caché.
+- **Ver respuesta POST sin ruta definida:**
 
-1. **Hosts local:** agrega `127.0.0.1 miapp.local` (Linux y/o Windows según tu entorno). Usa el *target* de la guía si está disponible (`make hosts-setup`).
+    ```bash
+    curl -i -X POST http://127.0.0.1:8080/
+    ```
 
-2. **Comprueba resolución:**
+### DNS
 
-   * `dig +short miapp.local` (debe devolver `127.0.0.1`).
-   * `getent hosts miapp.local` (muestra la base de resolución del sistema).
+1. Agrega el siguiente registro en tu archivo de hosts para simular la resolución de `miapp.local`:
 
-3. **TTL/caché (conceptual):** con `dig example.com A +ttlunits` explica cómo el TTL afecta respuestas repetidas (no cambies DNS público, solo observa).
+    ```
+    127.0.0.1 miapp.local
+    ```
 
-4. **Pregunta guía:** ¿Qué diferencia hay entre **/etc/hosts** y una zona DNS autoritativa? ¿Por qué el *hosts* sirve para laboratorio? Explica en 3–4 líneas.
+2. Verifica la resolución con `dig` o `getent`:
 
-> Herramientas: `dig`, `getent`, `resolv.conf`/`resolvectl` (si aplica).
+    ```bash
+    dig +short miapp.local
+    ```
 
-### 3) TLS: seguridad en tránsito con Nginx como *reverse proxy*
+### TLS con Nginx
 
-**Meta:** terminar TLS en Nginx `:443` y *proxyear* a Flask en `127.0.0.1:8080`.
+1. **Generar certificado autofirmado (si no tienes uno)**:
 
-1. **Certificado de laboratorio:** genera autofirmado (usa el *target* `make tls-cert` si existe) y coloca crt/key donde lo espera Nginx (ver guía).
+    ```bash
+    openssl genpkey -algorithm RSA -out server.key
+    openssl req -new -key server.key -out server.csr
+    openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+    ```
 
-2. **Configura Nginx:** usa el ejemplo provisto para **terminación TLS** y **proxy_pass** a `http://127.0.0.1:8080` con cabeceras `X-Forwarded-*`. Luego `nginx -t` y **reinicia** el servicio.
-   Incluye el *snippet* clave de tu `server` en el reporte.
+2. Configura Nginx para la terminación de TLS y proxy a Flask en `127.0.0.1:8080`.
 
-3. **Valida el *handshake*:** 
+    ```nginx
+    server {
+        listen 443 ssl;
+        server_name miapp.local;
 
-   * `openssl s_client -connect miapp.local:443 -servername miapp.local -brief` (muestra TLSv1.2/1.3, cadena, SNI).
-   * `curl -k https://miapp.local/` (explica el uso de `-k` con certificados autofirmados).
+        ssl_certificate /path/to/server.crt;
+        ssl_certificate_key /path/to/server.key;
 
-5. **Puertos y logs:**
+        location / {
+            proxy_pass http://127.0.0.1:8080;
+            proxy_set_header X-Forwarded-For $remote_addr;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            proxy_set_header X-Forwarded-Host $host;
+        }
+    }
+    ```
 
-   * `ss -ltnp | grep -E ':(443|8080)'` (evidencia de ambos sockets).
-   * `journalctl -u nginx -n 50 --no-pager` **o** `tail -n 50 /var/log/nginx/error.log` (pega 3–5 líneas relevantes).
+3. **Verificar TLS con OpenSSL:**
 
-> Nota: el *vínculo*  Nginx->Flask es **HTTP interno** en `127.0.0.1:8080`, tu cliente entra por **HTTPS** en `:443`.
+    ```bash
+    openssl s_client -connect miapp.local:443 -servername miapp.local -brief
+    ```
 
-### 4) 12-Factor App: port binding, configuración y logs
+---
 
-**Meta:** demostrar tres principios clave en tu app.
+## Preguntas guía
 
-1. **Port binding:** muestra que la app **escucha** en el puerto indicado por `PORT` (evidencia `ss`).
+1. **HTTP**: La idempotencia significa que un método puede repetirse sin alterar el estado del servidor. `PUT` reemplaza un recurso mientras que `POST` crea un nuevo recurso cada vez.
 
-2. **Config por entorno:** ejecuta dos veces con distintos `MESSAGE`/`RELEASE` y documenta el efecto en la respuesta JSON.
+2. **DNS**: El archivo `/etc/hosts` es útil para pruebas locales y laboratorio porque no requiere un servidor DNS, mientras que una zona DNS autoritativa es adecuada para producción porque puede manejar muchas resoluciones de nombres a través de un servidor DNS.
 
-3. **Logs a stdout:** redirige a archivo mediante *pipeline* de shell y adjunta 5 líneas representativas. Explica por qué **no** se configura *log file* en la app.
+3. **TLS**: SNI (Server Name Indication) permite a un servidor manejar múltiples certificados SSL en una misma IP. Lo verificamos con `openssl s_client`.
 
-### 5) Operación reproducible (Make/WSL/Linux)
+4. **12-Factor**: Los logs a stdout y la configuración por entorno permiten que la app sea fácilmente portable y escalable, especialmente en contenedores y pipelines de CI/CD.
 
-**Meta:** empaquetar tu flujo en `make` o scripts para repetirlo en otra máquina.
+5. **Operación**: `ss -ltnp` muestra información detallada de los puertos y los procesos que no verías con `curl`. Los logs de Nginx permiten identificar problemas de configuración.
 
-* Sigue la guía paso a paso (Linux/WSL) y **documenta divergencias** (p.ej. `systemctl` vs `service` en WSL, *hosts* de Windows vs WSL).
-  Incluye una tabla "Comando -> Resultado esperado".
-* Si tienes *targets* como `make prepare`, `make run`, `make nginx`, `make check-http`, `make check-tls`, `make dns-demo`, úsalos y pega su salida resumida.
+---
 
-### Mejora incremental 
+## Capturas de pantalla
 
-* **Logs estructurados** (JSON por línea) en stdout. Muestra un ejemplo y por qué facilita *parsing*.
-* **Script `make`** que haga *end-to-end*: preparar venv -> levantar app -> cert TLS -> Nginx -> chequeos `curl/dig/ss`.
-* **`systemd`** (si aplica): define unidad para la app y valida con `systemctl status` y `journalctl -u`. (Adjunta *snippet* clave y evidencia).
-
-### Preguntas guía (responde en `Reporte.md`)
-
-1. **HTTP:** explica **idempotencia** de métodos y su impacto en *retries*/*health checks*. Da un ejemplo con `curl -X PUT` vs `POST`.
-2. **DNS:** ¿por qué `hosts` es útil para laboratorio pero no para producción? ¿Cómo influye el **TTL** en latencia y uso de caché?
-3. **TLS:** ¿qué rol cumple **SNI** en el *handshake* y cómo lo demostraste con `openssl s_client`?
-4. **12-Factor:** ¿por qué **logs a stdout** y **config por entorno** simplifican contenedores y CI/CD?
-5. **Operación:** ¿qué muestra `ss -ltnp` que no ves con `curl`? ¿Cómo triangulas problemas con `journalctl`/logs de Nginx?
-
-
-### Comando a utilizar (usa varias en tu evidencia)
-
-* **HTTP:** `curl -v/-i/-X`, `httpie` (opcional).
-* **Puertos/Red:** `ss -ltnp`, `lsof -i`, `ip a`, `ip route`.
-* **DNS:** `dig +short`, `dig @1.1.1.1 example.com`, `getent hosts`.
-* **TLS:** `openssl s_client -connect host:443 -servername host -brief`.
-* **Logs/Servicios:** `journalctl -u nginx`, `tail -f /var/log/nginx/error.log`, `systemctl status` / `service status`.
-
-### Resultado esperado
-
-* Acceso **HTTP** en `127.0.0.1:8080` (port binding por entorno). Respuesta JSON con `message` y `release`. **Logs** en stdout.
-* Resolución de `miapp.local` vía *hosts* para pruebas.
-* Acceso **HTTPS** en `miapp.local:443` con Nginx como *reverse proxy* a `127.0.0.1:8080`. *Handshake* válido y evidencia de cabeceras `X-Forwarded-*`.
-```
+- **Captura 1**: Salida de `curl -v http://127.0.0.1:8080/`
+- **Captura 2**: Salida de `curl -i -X POST http://127.0.0.1:8080/`
+- **Captura 3**: Configuración de Nginx y los logs de Nginx
