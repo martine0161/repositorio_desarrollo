@@ -137,7 +137,7 @@ Se muestra el error recibido al intentar hacer una solicitud POST sin la ruta co
 ### 3. Captura de la respuesta exitosa del `ping` a `miapp.local`
 Este `ping` confirma que `miapp.local` se resolvió correctamente a `127.0.0.1`, indicando que el archivo **hosts** está configurado correctamente.
 
-![Ping miapp.local](imagenes/hosts.jpg)
+![Ping miapp.local](imagenes/hosts.png)
 
 ### 4. Captura de la configuración del archivo **hosts**
 Aquí se muestra cómo se configuró el archivo **hosts** en Windows para resolver `miapp.local` a `127.0.0.1`.
