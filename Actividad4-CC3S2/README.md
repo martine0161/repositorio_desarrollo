@@ -28,7 +28,7 @@ ls -a > ~/etc_lista.txt
 **Explicación:** Navegué al directorio `/etc`, listé todos los archivos (incluyendo ocultos) y redirigí la salida a un archivo en el home.
 
 **Captura de pantalla:**
-![Navegación en /etc](evidencias/navegacion_etc.png)
+![Navegación en /etc](imagenes/navegacion.jpg)
 
 ### Ejercicio 2: Globbing y conteo de archivos
 **Comando ejecutado:**
@@ -41,7 +41,7 @@ find /tmp -maxdepth 1 -type f \( -name '*.txt' -o -name '*.doc' \) | wc -l
 **Resultado:** [Número de archivos encontrados]
 
 **Captura de pantalla:**
-![Globbing en tmp](evidencias/globbing_tmp.png)
+![Globbing en tmp](imagenes/globbing.jpg)
 
 ### Ejercicio 3: Creación de archivo con printf
 **Comando ejecutado:**
@@ -55,7 +55,7 @@ nl test.txt
 ```
 
 **Captura de pantalla:**
-![Creación archivo test](evidencias/test_txt.png)
+![Creación archivo test](imagenes/crear_archivo.jpg)
 
 ### Ejercicio 4: Manejo de errores y xargs
 **Comando ejecutado:**
@@ -67,7 +67,7 @@ find . -maxdepth 1 -name 'archivo*.txt' | xargs echo rm
 **Explicación:** Redirigí errores a un archivo de log y usé xargs con echo para hacer un dry-run del comando rm.
 
 **Captura de pantalla:**
-![Manejo de errores](evidencias/manejo_errores.png)
+![Manejo de errores](imagenes/manejo_errores.jpg)
 
 ## Sección 2: Administración básica
 
@@ -91,7 +91,7 @@ id devsec
 **Explicación:** Creé un usuario 'devsec', un grupo 'ops', asigné el usuario al grupo y configuré permisos restrictivos en un archivo.
 
 **Captura de pantalla:**
-![Gestión usuarios](evidencias/usuarios_permisos.png)
+![Gestión usuarios](imagenes/gestion_usuarios.jpg)
 
 ### Ejercicio 2: Gestión de procesos
 **Comandos ejecutados:**
@@ -105,7 +105,7 @@ kill [PID]
 **Explicación:** Identifiqué procesos bash, inicié un proceso en background y lo terminé usando su PID.
 
 **Captura de pantalla:**
-![Gestión procesos](evidencias/gestion_procesos.png)
+![Gestión procesos](imagenes/gestion_procesos.jpg)
 
 ### Ejercicio 3: Servicios y logs con systemd
 **Comandos ejecutados:**
@@ -117,7 +117,7 @@ journalctl -u systemd-logind -n 10
 **Explicación:** Verifiqué el estado del servicio systemd-logind y revisé sus últimos 10 registros de log.
 
 **Captura de pantalla:**
-![Servicios systemd](evidencias/servicios_systemd.png)
+![Servicios systemd](imagenes/servicios_system.jpg)
 
 ## Sección 3: Utilidades de texto de Unix
 
