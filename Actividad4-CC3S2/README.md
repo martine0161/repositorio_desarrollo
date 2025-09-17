@@ -121,169 +121,85 @@ journalctl -u systemd-logind -n 10
 
 ## Sección 3: Utilidades de texto de Unix
 
-### Ejercicio 1: Búsqueda con grep
-**Comando ejecutado:**
-```bash
-grep root /etc/passwd
-```
-
-**Explicación:** Busqué todas las líneas que contengan "root" en el archivo de usuarios del sistema.
-
-**Captura de pantalla:**
-![Búsqueda grep](evidencias/grep_root.png)
-
-### Ejercicio 2: Sustitución con sed
+### Preparación de archivos de prueba
 **Comandos ejecutados:**
 ```bash
-printf "linea1: dato1\nlinea2: dato2\n" > datos.txt
-sed 's/dato1/secreto/' datos.txt > nuevo.txt
+# Crear archivos de datos para las pruebas
+printf "linea1: dato1\nlinea2: dato2\nlinea3: dato1\n" > datos.txt
+printf "usuario1:password123:1001\nusuario2:secret456:1002\nroot:admin789:0\n" > usuarios_test.txt
 ```
 
-**Explicación:** Creé un archivo de datos y usé sed para sustituir "dato1" por "secreto".
+### Ejercicio Combinado: Herramientas de procesamiento de texto
 
-**Captura de pantalla:**
-![Sustitución sed](evidencias/sed_sustitucion.png)
-
-### Ejercicio 3: Extracción con awk y cut
-**Comando ejecutado:**
+**Comandos ejecutados:**
 ```bash
-awk -F: '{print $1}' /etc/passwd | sort | uniq
-```
+# 1. Búsqueda con grep
+grep root /etc/passwd
+grep -n "dato1" datos.txt
 
-**Explicación:** Extraje los nombres de usuario del archivo /etc/passwd, los ordené y eliminé duplicados.
+# 2. Sustitución con sed
+sed 's/dato1/secreto/g' datos.txt > nuevo.txt
+echo "=== Comparación original vs modificado ==="
+echo "Original:"; cat datos.txt
+echo "Modificado:"; cat nuevo.txt
 
-**Captura de pantalla:**
-![Extracción awk](evidencias/awk_usuarios.png)
+# 3. Extracción con awk y cut
+echo "Usuarios del sistema (primeros 10):"
+awk -F: '{print $1}' /etc/passwd | head -10
+echo "Comparando awk vs cut:"
+awk -F: '{print $1}' usuarios_test.txt
+cut -d: -f1 usuarios_test.txt
 
-### Ejercicio 4: Transformación con tr y tee
-**Comando ejecutado:**
-```bash
-printf "hola\n" | tr 'a-z' 'A-Z' | tee mayus.txt
-```
+# 4. Transformación y pipeline completo
+printf "hola mundo cli\n" | tr 'a-z' 'A-Z' | tee mayus.txt
+echo "Resultado guardado en mayus.txt:"
+cat mayus.txt
 
-**Explicación:** Convertí texto a mayúsculas y guardé el resultado usando tee para mostrar y almacenar simultáneamente.
-
-**Captura de pantalla:**
-![Transformación tr](evidencias/tr_mayusculas.png)
-
-### Ejercicio 5: Búsqueda de archivos con find
-**Comando ejecutado:**
-```bash
-find /tmp -mtime -5 -type f
-```
-
-**Explicación:** Busqué archivos en /tmp que fueron modificados en los últimos 5 días.
-
-**Captura de pantalla:**
-![Búsqueda find](evidencias/find_archivos.png)
-
-### Ejercicio 6: Pipeline completo
-**Comando ejecutado:**
-```bash
+# 5. Pipeline avanzado - archivos de configuración
 ls /etc | grep conf | sort | tee lista_conf.txt | wc -l
+echo "Total de archivos de configuración encontrados"
+echo "Primeros 10 archivos:"
+head -10 lista_conf.txt
 ```
 
-**Explicación:** Creé un pipeline que lista archivos de configuración en /etc, los ordena, guarda en archivo y cuenta el total.
-
-**Resultado:** [Número de archivos de configuración encontrados]
+**Explicación:** Este conjunto de comandos demuestra el uso integrado de las principales herramientas de texto Unix:
+- **grep**: Para buscar patrones específicos en archivos del sistema y archivos de prueba
+- **sed**: Para sustituir texto preservando el archivo original
+- **awk y cut**: Para extraer campos específicos, mostrando diferentes enfoques
+- **tr y tee**: Para transformación de texto y salida dual (pantalla + archivo)
+- **Pipeline completo**: Combinando múltiples herramientas para procesar y contar archivos
 
 **Captura de pantalla:**
-![Pipeline completo](evidencias/pipeline_completo.png)
+![Utilidades de texto combinadas](imagenes/utilidades.jpg)
 
-## Auditoría y Seguridad
-
-### Logs de errores del sistema
+### Ejercicio de búsqueda avanzada con find
 **Comando ejecutado:**
 ```bash
-journalctl -p err..alert --since "today"
+# Crear archivos de diferentes fechas para la prueba
+touch -d "3 days ago" ~/lab-cli/archivo_viejo.txt
+touch ~/lab-cli/archivo_nuevo.txt
+
+# Buscar archivos modificados recientemente
+echo "Archivos en nuestro directorio modificados en últimos 5 días:"
+find ~/lab-cli -mtime -5 -type f -exec ls -la {} \;
+
+echo "Archivos en /tmp modificados recientemente:"
+find /tmp -mtime -5 -type f 2>/dev/null | head -5
 ```
 
-**Fallback para sistemas sin systemd:**
-```bash
-sudo tail -n 100 /var/log/syslog | grep -i error
-```
+**Explicación:** Uso de `find` para localizar archivos por criterios temporales, fundamental para auditoría de cambios en sistemas.
 
 **Captura de pantalla:**
-![Logs errores](evidencias/logs_errores.png)
+![Búsqueda con find](imagenes/busqueda_find.jpg)
 
-### Archivos modificados recientemente
+### Verificación de archivos generados
 **Comando ejecutado:**
 ```bash
-find /tmp -mtime -5 -type f -printf '%TY-%Tm-%Td %TT %p\n' | sort
+echo "=== ARCHIVOS GENERADOS EN UTILIDADES DE TEXTO ==="
+ls -la ~/lab-cli/*.txt
+echo "=== CONTEO DE LÍNEAS ==="
+wc -l ~/lab-cli/datos.txt ~/lab-cli/nuevo.txt ~/lab-cli/lista_conf.txt
 ```
 
 **Captura de pantalla:**
-![Archivos modificados](evidencias/archivos_modificados.png)
-
-### Verificación de privilegios
-**Comando ejecutado:**
-```bash
-sudo -l
-```
-
-**Captura de pantalla:**
-![Privilegios sudo](evidencias/privilegios_sudo.png)
-
-### Mini-pipeline de auditoría
-**Comando ejecutado:**
-```bash
-sudo journalctl -t sshd -t sudo --since today | awk '{print $1,$2,$3,$5}' | sort | uniq -c | sort -nr
-```
-
-**Explicación:** Analicé eventos de autenticación SSH y sudo del día actual, contándolos por frecuencia.
-
-**Captura de pantalla:**
-![Pipeline auditoría](evidencias/pipeline_auditoria.png)
-
-## Comandos Clave Aprendidos
-
-### Navegación y archivos
-- `pwd` - Mostrar directorio actual
-- `ls -la` - Listar archivos con detalles y ocultos
-- `cd` - Cambiar directorio
-- `find` - Buscar archivos por criterios
-
-### Redirecciones y pipes
-- `>` - Redireccionar salida (sobrescribir)
-- `>>` - Redireccionar salida (agregar)
-- `|` - Pipe para enlazar comandos
-- `tee` - Dividir salida a múltiples destinos
-
-### Administración del sistema
-- `chmod` - Cambiar permisos
-- `chown` - Cambiar propietario
-- `ps aux` - Listar procesos
-- `systemctl` - Controlar servicios
-
-### Procesamiento de texto
-- `grep` - Buscar patrones
-- `sed` - Editar streams de texto
-- `awk` - Procesar datos por columnas
-- `sort | uniq` - Ordenar y eliminar duplicados
-
-## Lecciones Aprendidas
-
-### Seguridad en DevSecOps
-- Importancia del principio de menor privilegio
-- Uso de comandos seguros (--preserve-root, -print0/-0)
-- Redacción de información sensible en logs
-- Auditoría continua de eventos del sistema
-
-### Mejores prácticas
-- Siempre hacer dry-run antes de operaciones masivas
-- Usar opciones interactivas (-i) para operaciones críticas
-- Verificar permisos antes de cambiar archivos importantes
-- Mantener logs de auditoría para investigaciones
-
-## Archivos Generados
-- `evidencias/sesion_redactada.txt` - Sesión de terminal redactada
-- `etc_lista.txt` - Lista de archivos en /etc
-- `test.txt` - Archivo de prueba con líneas numeradas
-- `mayus.txt` - Texto transformado a mayúsculas
-- `lista_conf.txt` - Archivos de configuración encontrados
-- `errores.log` - Log de errores capturados
-
-## Conclusiones
-Este laboratorio me permitió familiarizarme con herramientas CLI esenciales para DevSecOps. Aprendí la importancia de la seguridad en operaciones de línea de comandos y cómo estas herramientas son fundamentales para automatización, auditoría y gestión segura de sistemas.
-
-Las habilidades adquiridas son directamente aplicables en pipelines CI/CD, análisis de logs de seguridad, y administración de infraestructura en entornos de producción.
+![Archivos generados sección 3](imagenes/archivos_generado.jpg)
