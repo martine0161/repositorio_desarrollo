@@ -1,0 +1,17 @@
+shellcheck scripts/run_tests.sh
+
+In scripts/run_tests.sh line 67:
+cat <<'EOF' >|"$tmp"
+^-- SC1009 (info): The mentioned syntax error was in this simple command.
+    ^-- SC1073 (error): Couldn't parse this here document. Fix to allow more checks.
+      ^---^ SC1044 (error): Couldn't find end token `EOF' in the here document.
+
+
+In scripts/run_tests.sh line 69:
+
+^-- SC1072 (error): Here document was not correctly terminated. Fix any mentioned problems and try again.
+
+For more information:
+  https://www.shellcheck.net/wiki/SC1044 -- Couldn't find end token `EOF' in ...
+  https://www.shellcheck.net/wiki/SC1072 -- Here document was not correctly t...
+  https://www.shellcheck.net/wiki/SC1073 -- Couldn't parse this here document...

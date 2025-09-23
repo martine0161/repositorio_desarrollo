@@ -1,0 +1,4 @@
+Demostrando pipefail:
+Sin pipefail: el pipe se considera exitoso (status 0).
+Con pipefail: se detecta el fallo (status != 0).
+./scripts/run_tests.sh: line 68: warning: here-document at line 67 delimited by end-of-file (wanted `EOF')

@@ -1,0 +1,6 @@
+mkdir -p out
+python4 src/hello.py > out/hello.txt
+bash: line 1: python4: command not found
+make: *** [Makefile:27: out/hello.txt] Error 127
+make: *** Deleting file 'out/hello.txt'
+ls: cannot access 'out/hello.txt': No such file or directory
