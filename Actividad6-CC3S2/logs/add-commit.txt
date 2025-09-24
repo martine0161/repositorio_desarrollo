@@ -1,0 +1,13 @@
+=== Primer commit ===
+a16e562 Commit inicial con README.md
+
+=== Segundo commit ===
+b641640 Configura la documentación base del repositorio
+
+=== Tercer commit ===
+344a02a Agrega main.py
+
+=== Log final después de commits ===
+344a02a (HEAD -> main) Agrega main.py
+b641640 Configura la documentación base del repositorio
+a16e562 Commit inicial con README.md

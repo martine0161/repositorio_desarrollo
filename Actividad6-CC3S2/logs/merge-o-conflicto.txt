@@ -1,0 +1,22 @@
+Auto-merging main.py
+CONFLICT (content): Merge conflict in main.py
+Automatic merge failed; fix conflicts and then commit the result.
+
+=== Estado durante el conflicto ===
+On branch main
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+  (use "git merge --abort" to abort the merge)
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+	both modified:   main.py
+
+=== Conflicto resuelto ===
+Conflicto resuelto combinando ambas versiones del código
+5f8d321 (HEAD -> main) Resuelve conflicto de fusión
+3e7b429 Actualiza main.py en rama main
+2c9a568 Agrega nueva funcionalidad
+344a02a Agrega main.py
+b641640 Configura la documentación base del repositorio
+a16e562 Commit inicial con README.md

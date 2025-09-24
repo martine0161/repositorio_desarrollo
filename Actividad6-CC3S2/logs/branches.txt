@@ -1,0 +1,9 @@
+=== Ramas iniciales ===
+* main a16e562 Commit inicial con README.md
+
+=== Después de crear feature/new-feature ===
+  feature/new-feature 344a02a Agrega main.py
+* main 344a02a Agrega main.py
+
+=== Estado final después de merge ===
+* main 5f8d321 Resuelve conflicto de fusión
