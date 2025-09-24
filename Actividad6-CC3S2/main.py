@@ -1,2 +1,3 @@
-print('Hello World - actualizado')
-print('Nueva funcionalidad')
+def greet():
+    print('Hello como una función avanzada')
+[200~greet()
