@@ -1,7 +1,9 @@
-<<<<<<< HEAD
-print('Hello World-actualizado en main')
-=======
+cat > main.py << 'EOF'
 def greet():
     print('Hello como una función avanzada')
-[200~greet()
->>>>>>> feature/advanced-feature
+
+print('Hello World-actualizado en main')
+greet()
+EOF# Corrección de errores (rollback)
+def rollback_fix():
+    print('Error corregido en la funcionalidad de rollback')
