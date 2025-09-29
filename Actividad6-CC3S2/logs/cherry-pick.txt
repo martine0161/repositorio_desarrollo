@@ -1,1 +1,5 @@
-No se utilizó cherry-pick en esta práctica
+=== Cherry-pick realizado ===
+Commit aplicado: aca7a8e
+aca7a8e Corregir error en funcionalidad de rollback
+1a0933b correcciones y evidencias
+fb43464 correccion actividad 6

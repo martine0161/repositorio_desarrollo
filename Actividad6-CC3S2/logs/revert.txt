@@ -1,0 +1,8 @@
+=== Ejemplo de git revert ===
+Comando: git revert HEAD
+Efecto: Crea commit inverso que deshace cambios previos
+1a0933b correcciones y evidencias
+fb43464 correccion actividad 6
+4d240d2 readme actividad 6
+a4dd9ec actividad 6 preliminar
+f7af9be Resuelve el conflicto de fusión entre la versión main y feature/advanced-feature

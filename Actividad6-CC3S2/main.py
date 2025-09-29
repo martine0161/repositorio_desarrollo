@@ -7,3 +7,4 @@ greet()
 EOF# Corrección de errores (rollback)
 def rollback_fix():
     print('Error corregido en la funcionalidad de rollback')
+Cambio temporal para stash

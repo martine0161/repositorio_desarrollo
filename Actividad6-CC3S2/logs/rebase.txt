@@ -1,0 +1,17 @@
+=== Git Rebase ===
+
+El rebase reescribe el historial aplicando commits de una rama sobre otra
+
+Uso típico:
+git checkout feature-branch
+git rebase main
+
+Rebase interactivo para combinar commits:
+git rebase -i HEAD~3
+
+Opciones en rebase interactivo:
+- pick: mantener commit
+- squash: combinar con commit anterior
+- reword: cambiar mensaje
+- edit: editar commit
+- drop: eliminar commit

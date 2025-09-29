@@ -1,0 +1,5 @@
+=== Git Stash ===
+Comando: git stash
+stash@{0}: WIP on feature/cherry-pick: aca7a8e Corregir error en funcionalidad de rollback
+
+Recuperar con: git stash pop
