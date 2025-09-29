@@ -66,3 +66,8 @@ fi
 # Escribir en $tmp (ya existe); '>|' evita el bloqueo de 'noclobber'
 cat <<'EOF' >|"$tmp"
 Testeando script Python
+EOF
+
+# Ejecutar
+check_deps
+run_tests "${SRC_DIR}/hello.py"

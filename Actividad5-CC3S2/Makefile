@@ -52,7 +52,7 @@ tools: ## Verificar dependencias
 
 check: lint test ## Ejecutar lint y tests
 
-benchmark: | $(OUT_DIR) ## Medir tiempo de ejecución
+benchmark: ## Medir tiempo de ejecución
 	@mkdir -p $(OUT_DIR)
 	@echo "Benchmark: $(shell date '+%Y-%m-%d %H:%M:%S') / Commit: $(shell git rev-parse --short HEAD 2>/dev/null || echo 'N/A')" > $(OUT_DIR)/benchmark.txt
 	@if command -v /usr/bin/time >/dev/null 2>&1; then \

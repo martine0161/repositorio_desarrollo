@@ -1,0 +1,8 @@
+SO: Ubuntu 22.04 en WSL2
+   Shell: bash 5.2.21
+   Make: GNU Make 4.3
+   Python: Python 3.12.3
+   Tar: GNU tar 1.35
+   SHA256: GNU coreutils
+   Shellcheck: 0.9.0
+   Shfmt: 3.8.0
