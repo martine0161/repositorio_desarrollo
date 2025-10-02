@@ -1,0 +1,6 @@
+* 8fb6a76 (HEAD -> main) Octopus merge de 3 features
+* edc7f3b Merge validado de feature-validate-merge
+* 15edc2e Resolver conflicto de merge con feature-conflicto
+* a9a70b4 Merge feature con --no-ff
+* f7af9be Resuelve el conflicto de fusión entre la versión main y feature/advanced-feature
+* 9489e3e Resuelve conflicto de fusión

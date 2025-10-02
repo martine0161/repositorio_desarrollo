@@ -1,0 +1,50 @@
+*   a9a70b4 (HEAD -> main) Merge feature con --no-ff
+|\  
+| * 4830136 (feature-2-noff) Agregar funcionalidad B
+| * 282d16a Agregar funcionalidad A
+|/  
+* 19b0c73 (feature-1-ff) Agregar feature para fusión FF
+* f0f08fc (origin/main) Completa Actividad 6: ejercicios, correcciones y documentación
+* 83a20b0 (feature/team-feature) Agrega script de colaboración
+* aca7a8e (feature/cherry-pick) Corregir error en funcionalidad de rollback
+* 1a0933b correcciones y evidencias
+* fb43464 correccion actividad 6
+* 4d240d2 readme actividad 6
+* a4dd9ec actividad 6 preliminar
+*   f7af9be Resuelve el conflicto de fusión entre la versión main y feature/advanced-feature
+|\  
+| * 20e3e75 Agrega la función greet como función avanzada
+* | 9ee10d6 Actualizar el mensaje main.py en la rama main
+|/  
+*   9489e3e Resuelve conflicto de fusión
+|\  
+| * c470e2b Agrega nueva funcionalidad
+* | 460b80e Actualiza main.py en rama main
+|/  
+* a76c97a correccion readme
+* 5635daa actividad 5
+* b3d1e65 cambios actividad 3
+* 7ae3572 readme actividad 3
+* c90dad7 readme actividad 3
+* 145b11d actividad 3 correccion
+* 3a830f0 Imagenes actividad 4
+* a1e1b7d Agregado imagenes actividad 4
+* b14dd7a Actividad 4
+* 8a87bfc Actividad 4
+* b484da4 Correccion imagen
+* 249f363 Correccion imagenes
+* 0f056dc Correccion
+* 45ad894 Actividad 2
+* 5d6e2ed correcciones readme
+* 5e79dd4 agregando actividad 4
+* 7ba83ad agregado de actividades 2 3
+* ce1a696 Agregado de ultimas imagenes
+* 8172989 Correccion 2
+* 5ea7641 Agregado de imagenes 2
+* da1529d Correccion imagen 1
+* e21951b Agregado de imagen 1
+* 667b72a Cambios al Readme
+* fd8c5b9 Readme esqueleto
+* 7ae47ea Agregando carpetas
+* a637b1f (bugfix/rollback-feature) Añadido Actividad1-CC3S2
+* cdace2a first commit

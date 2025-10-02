@@ -1,1 +1,45 @@
-<h1>Proyecto CC3S2 (resuelto desde main)</h1>
+# Crear un archivo nuevo para la demostración de conflicto
+cat > demo-conflicto-captura.html << 'EOF'
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo de Conflicto Git</title>
+</head>
+<body>
+    <header>
+<<<<<<< HEAD
+        <h1>Proyecto Principal - Versión MAIN</h1>
+=======
+        <h1>Proyecto Principal - Versión FEATURE</h1>
+>>>>>>> feature-conflicto-demo
+    </header>
+    
+    <main>
+        <section>
+<<<<<<< HEAD
+            <p>Este contenido fue modificado en la rama main</p>
+            <ul>
+                <li>Item main 1</li>
+                <li>Item main 2</li>
+            </ul>
+=======
+            <p>Este contenido fue modificado en la rama feature</p>
+            <div class="feature-content">
+                <span>Nueva funcionalidad</span>
+            </div>
+>>>>>>> feature-conflicto-demo
+        </section>
+    </main>
+
+    <footer>
+<<<<<<< HEAD
+        <p>Copyright 2024 - Main Branch</p>
+=======
+        <p>Copyright 2024 - Feature Branch</p>
+>>>>>>> feature-conflicto-demo
+    </footer>
+</body>
+</html>
+EOF
