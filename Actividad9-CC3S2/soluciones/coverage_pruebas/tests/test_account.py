@@ -16,10 +16,12 @@ ACCOUNT_DATA = {}
 @pytest.fixture(scope="module", autouse=True)
 def setup_database():
     """Configura la base de datos antes y después de todas las pruebas"""
-    db.create_all()  # Crea las tablas según los modelos
-    yield
-    # Se ejecuta después de todas las pruebas
-    db.session.close()
+    from models import app, db
+    
+    with app.app_context():
+        db.create_all()
+        yield
+        db.session.close()
 
 
 class TestAccountModel:
@@ -29,7 +31,10 @@ class TestAccountModel:
     def setup_class(cls):
         """Conectar y cargar los datos necesarios para las pruebas"""
         global ACCOUNT_DATA
-        with open("tests/fixtures/account_data.json") as json_data:
+        import os
+        current_dir = os.path.dirname(__file__)
+        fixture_path = os.path.join(current_dir, 'fixtures', 'account_data.json')
+        with open(fixture_path) as json_data:
             ACCOUNT_DATA = json.load(json_data)
         print(f"ACCOUNT_DATA cargado: {ACCOUNT_DATA}")
 

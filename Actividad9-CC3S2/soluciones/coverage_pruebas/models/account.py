@@ -24,7 +24,7 @@ class Account(db.Model):
     email = Column(String(64), nullable=False, unique=True)
     phone_number = Column(String(32), nullable=True)
     disabled = Column(Boolean(), nullable=False, default=False)
-    date_joined = Column(Date, nullable=False, server_default=func.now())
+    date_joined = db.Column(db.DateTime, nullable=False, server_default=func.now())
 
     def __repr__(self):
         return f"<Account '{self.name}'>"

@@ -17,11 +17,11 @@ from requests import Response
 @pytest.fixture(scope="session")
 def imdb_data():
     """Carga las respuestas de IMDb necesarias para las pruebas"""
+    import os
     current_dir = os.path.dirname(__file__)
-    fixture_path = os.path.join(current_dir, "fixtures", "imdb_responses.json")
+    fixture_path = os.path.join(current_dir, 'fixtures', 'imdb_responses.json')
     with open(fixture_path) as json_data:
         data = json.load(json_data)
-        print("Contenido de imdb_data:", data)  # Para depuración
         return data
 
 

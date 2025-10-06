@@ -17,9 +17,12 @@ from models.account import Account, DataValidationError
 @pytest.fixture(scope="session", autouse=True)
 def setup_database():
     """Configura la base de datos antes de las pruebas"""
-    db.create_all()
-    yield
-    db.session.close()
+    from models import app, db
+    
+    with app.app_context():
+        db.create_all()
+        yield
+        db.session.close()
 
 
 @pytest.fixture(autouse=True)

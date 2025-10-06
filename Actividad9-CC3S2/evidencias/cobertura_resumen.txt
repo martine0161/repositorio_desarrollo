@@ -1,0 +1,12 @@
+.venv\Scripts\pytest soluciones/coverage_pruebas --cov=models --cov-report term-missing -q
+..........                                                               [100%]
+
+---------- coverage: platform win32, python 3.13.7-final-0 -----------
+Name                                             Stmts   Miss  Cover   Missing
+------------------------------------------------------------------------------
+soluciones\coverage_pruebas\models\__init__.py       6      0   100%
+soluciones\coverage_pruebas\models\account.py       47      0   100%
+------------------------------------------------------------------------------
+TOTAL                                               53      0   100%
+
+10 passed in 1.01s
