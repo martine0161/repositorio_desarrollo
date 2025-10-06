@@ -1,36 +1,22 @@
-# Actividad 6: Introducción a Git - Conceptos básicos
+## 📌 Información
+- **Estudiante:** Martín Centeno Leon
+- **Curso:** CC3S2 - Desarrollo de Software
+- **Ciclo:** 2025-II
+- **Universidad:** Universidad Nacional de Ingeniería (UNI)
 
-## Comandos ejecutados y evidencias
+## 📖 Sobre el Curso
 
-### git config
-Configuré usuario y email para Git.
-Comando: `git config --list`
-Archivo: `logs/config.txt`
+**CC3S2 - Desarrollo de Software** es un curso que profundiza en las prácticas modernas de ingeniería de software, enfocándose en:
 
-### git init
-Inicialicé repositorio en directorio kapumota-repo.
-Comando: `git init` + `git status`
-Archivo: `logs/init-status.txt`
+- **Desarrollo Guiado por Pruebas (TDD):** Escribir tests antes que el código de producción
+- **Integración y Entrega Continua (CI/CD):** Automatización del pipeline de desarrollo
+- **Calidad de Software:** Métricas, cobertura de código y buenas prácticas
+- **Arquitectura de Software:** Patrones de diseño y principios SOLID
+- **DevOps:** Containerización, orquestación y despliegue
 
-### git add/commit
-Agregué archivos y realicé commits secuenciales.
-Comandos: `git add`, `git commit -m "mensaje"`
-Archivo: `logs/add-commit.txt`
-
-### git log
-Exploré historial con diferentes formatos.
-Comando: `git log --oneline`
-Archivo: `logs/log-oneline.txt`
-
-### Ramas (branch/checkout/merge)
-Creé ramas, cambié entre ellas y fusioné con resolución de conflictos.
-Resolví conflictos manualmente combinando código de ambas ramas.
-Comandos: `git branch`, `git checkout`, `git merge`
-Archivo: `logs/branches.txt`, `logs/merge-o-conflicto.txt`
-
-## Beneficios de Git observados
-
-Git mantiene historial claro permitiendo rastrear evolución del código y identificar cambios específicos. Las ramas facilitan desarrollo paralelo sin afectar código principal, ideal para características experimentales y colaboración en equipo.
-
-## Repositorio remoto
-Repositorio principal del curso en GitHub (se subirá al final).
+El curso utiliza GitHub como plataforma principal para:
+- Control de versiones con Git
+- Gestión de proyectos con Issues y Projects
+- Revisión de código mediante Pull Requests
+- Automatización con GitHub Actions
+- Documentación técnica colaborativa
