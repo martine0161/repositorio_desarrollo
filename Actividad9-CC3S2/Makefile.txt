@@ -1,0 +1,32 @@
+# 1. Clonar repo
+cd C:\Users\marti\Desktop
+git clone https://github.com/kapumota/Curso-CC3S2.git
+
+# 2. Ir a tu carpeta
+cd "C:\Users\marti\OneDrive\Desktop\Ciclo 25-II\6.Desarrollo de Software\Repositorio\Actividades\Actividad9-CC3S2"
+
+# 3. Crear estructura
+mkdir src evidencias evidencias\capturas soluciones
+
+# 4. Copiar requirements.txt del Lab4
+copy C:\Users\marti\Desktop\Curso-CC3S2\labs\Laboratorio4\requirements.txt .
+
+# 5. Crear Makefile (con notepad, contenido de arriba)
+notepad Makefile
+
+# 6. Copiar las 7 carpetas
+set REPO=C:\Users\marti\Desktop\Curso-CC3S2\labs\Laboratorio4\Actividades
+xcopy /E /I /Y "%REPO%\aserciones_pruebas" "soluciones\aserciones_pruebas"
+xcopy /E /I /Y "%REPO%\pruebas_pytest" "soluciones\pruebas_pytest"
+xcopy /E /I /Y "%REPO%\pruebas_fixtures" "soluciones\pruebas_fixtures"
+xcopy /E /I /Y "%REPO%\coverage_pruebas" "soluciones\coverage_pruebas"
+xcopy /E /I /Y "%REPO%\factories_fakes" "soluciones\factories_fakes"
+xcopy /E /I /Y "%REPO%\mocking_objetos" "soluciones\mocking_objetos"
+xcopy /E /I /Y "%REPO%\practica_tdd" "soluciones\practica_tdd"
+
+# 7. Instalar make (si no lo tienes)
+# Usa Git Bash, Chocolatey, o descárgalo
+
+# 8. Ejecutar
+make deps
+make test_all

@@ -1,18 +1,36 @@
-# Actividad 9: pytest + coverage + fixtures + factories + mocking + TDD
+\# Actividad 9: pytest + coverage + fixtures + factories + mocking + TDD
 
-## 📌 Información del Proyecto
-- **Estudiante:** [Tu nombre]
-- **Curso:** CC3S2
-- **Fecha:** Octubre 2025
 
-## 🚀 Requisitos
-- Python 3.10+
-- pip
-- virtualenv
 
-## 📦 Instalación
+\## 📌 Información del Proyecto
 
-### 1. Crear entorno virtual
+\- \*\*Estudiante:\*\* \[Tu nombre]
+
+\- \*\*Curso:\*\* CC3S2
+
+\- \*\*Fecha:\*\* Octubre 2025
+
+
+
+\## 🚀 Requisitos Previos
+
+\- Python 3.10+
+
+\- pip
+
+\- Git
+
+
+
+\## 📦 Instalación
+
+
+
+\### 1. Clonar repositorio del curso
+
 ```bash
-python -m venv .venv
-.venv\Scripts\activate
+
+cd C:\\Users\\marti\\Desktop
+
+git clone https://github.com/kapumota/Curso-CC3S2.git
+
