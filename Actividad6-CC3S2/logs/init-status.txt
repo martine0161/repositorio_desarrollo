@@ -1,6 +1,7 @@
-Initialized empty Git repository in C:/Users/marti/OneDrive/Desktop/Ciclo 25-II/6.Desarrollo de Software/Repositorio/Actividades/Actividad6-CC3S2/temp-git-demo/.git/
+=== git init ===
+Initialized empty Git repository in /ruta/al/proyecto/.git/
 
-=== Estado inicial después de git init ===
+=== git status inicial ===
 On branch master
 
 No commits yet

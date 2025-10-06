@@ -1,5 +1,18 @@
-=== Git Stash ===
-Comando: git stash
-stash@{0}: WIP on feature/cherry-pick: aca7a8e Corregir error en funcionalidad de rollback
+=== Estado antes de stash ===
+Changes not staged for commit:
+  modified:   main.py
 
-Recuperar con: git stash pop
+=== Guardando con git stash ===
+Saved working directory and index state WIP on feature/cherry-pick: aca7a8e
+
+=== Estado después de stash (limpio) ===
+nothing to commit, working tree clean
+
+=== Lista de stashes ===
+stash@{0}: WIP on feature/cherry-pick: aca7a8e Corregir error
+
+=== Recuperando con git stash pop ===
+On branch feature/cherry-pick
+Changes not staged for commit:
+  modified:   main.py
+Dropped refs/stash@{0}

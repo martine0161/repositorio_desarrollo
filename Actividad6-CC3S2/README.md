@@ -1,4 +1,3 @@
-```markdown
 # Actividad 6: Git - Conceptos Básicos y Operaciones Esenciales
 
 ## Descripción
@@ -94,4 +93,3 @@ Actividad6-CC3S2/
 - ⏳ Ejercicio 4: git reset y git restore
 - ⏳ Ejercicio 5: Trabajo colaborativo con Pull Requests
 - ⏳ Ejercicio 6: Cherry-picking y git stash
-```
