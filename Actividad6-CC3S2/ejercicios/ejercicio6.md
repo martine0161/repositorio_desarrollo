@@ -1,40 +1,47 @@
 # Ejercicio 6: Cherry-pick y Git Stash
+
 ## 1. Cherry-pick
-Commit a aplicar: aca7a8e
 
-## 2. Git Stash
-On branch feature/cherry-pick
-You are currently cherry-picking commit aca7a8e.
-  (all conflicts fixed: run "git cherry-pick --continue")
-  (use "git cherry-pick --skip" to skip this patch)
-  (use "git cherry-pick --abort" to cancel the cherry-pick operation)
+Commit seleccionado: `aca7a8e` - "Corregir error en funcionalidad de rollback"
 
+Comandos:
+```bash
+git checkout -b feature/cherry-pick
+git cherry-pick aca7a8e
+```
+
+Resultado: Commit aplicado en nueva rama
+
+## 2. Git Stash - Guardar cambios temporalmente
+
+Estado antes de stash:
+```
 Changes not staged for commit:
-  (use "git add <file>..." to update what will be committed)
-  (use "git restore <file>..." to discard changes in working directory)
-	modified:   ../README.md
-	modified:   ../logs/cherry-pick.txt
-	modified:   ../logs/init-status.txt
-	modified:   ../main.py
-	modified:   ../../README.md
+	modified:   main.py
+	modified:   README.md
+```
 
-Untracked files:
-  (use "git add <file>..." to include in what will be committed)
-	./
-	../logs/revert.txt
+Comando: `git stash`
 
-no changes added to commit (use "git add" and/or "git commit -a")
+Estado después de stash:
+```
+nothing added to commit but untracked files present
+```
 
-### Guardando cambios con stash
-Cambios guardados temporalmente
+## 3. Recuperar cambios del stash
 
-### Estado después de stash
-On branch feature/cherry-pick
-Untracked files:
-  (use "git add <file>..." to include in what will be committed)
-	./
-	../logs/revert.txt
+Comando: `git stash pop`
 
-nothing added to commit but untracked files present (use "git add" to track)
+Resultado: Cambios restaurados al working directory
 
-### Cambios recuperados con stash pop
+## 4. Verificar historial
+
+Comando: `git log --oneline`
+
+Confirmación: Cherry-pick aplicado correctamente en feature/cherry-pick
+
+## Resumen
+
+- **git cherry-pick**: Aplica commit específico en rama actual
+- **git stash**: Guarda cambios temporalmente sin commit
+- **git stash pop**: Recupera último stash guardado
