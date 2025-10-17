@@ -1,0 +1,29 @@
+{
+  "search_title": {
+    "results": [
+      {"id": "tt0102926", "title": "Bambi", "description": "A young deer", "image": "url"},
+      {"id": "tt0102927", "title": "Bambi II", "description": "Sequel", "image": "url"}
+    ],
+    "expression": "Bambi",
+    "errorMessage": ""
+  },
+  "movie_ratings": {
+    "imDbId": "tt0102926",
+    "imDb": "7.3",
+    "metacritic": "65",
+    "rottenTomatoes": "90",
+    "filmAffinity": "7.1",
+    "errorMessage": ""
+  },
+  "movie_reviews": {
+    "imDbId": "tt0102926",
+    "title": "Bambi",
+    "items": [
+      {"username": "reviewer1", "title": "Great!", "content": "Amazing movie"}
+    ],
+    "errorMessage": ""
+  },
+  "invalid_api_key": {
+    "errorMessage": "Invalid API Key"
+  }
+}

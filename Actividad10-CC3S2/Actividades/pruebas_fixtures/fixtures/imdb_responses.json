@@ -1,0 +1,18 @@
+{
+  "search_titles_ok": {
+    "results": [
+      {"id": "tt0111161", "title": "The Shawshank Redemption"},
+      {"id": "tt0068646", "title": "The Godfather"}
+    ],
+    "errorMessage": ""
+  },
+  "ratings_ok": {
+    "imDbId": "tt0111161",
+    "imDb": "9.3",
+    "metacritic": "82",
+    "theMovieDb": "8.7"
+  },
+  "malformed_payload": {
+    "oops": "not the expected schema"
+  }
+}
