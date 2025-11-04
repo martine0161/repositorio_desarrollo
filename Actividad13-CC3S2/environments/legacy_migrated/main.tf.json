@@ -1,0 +1,20 @@
+{
+  "resource": {
+    "null_resource": {
+      "legacy_app": {
+        "triggers": {
+          "port": "${var.port}",
+          "db_host": "${var.db_host}",
+          "db_port": "${var.db_port}"
+        },
+        "provisioner": [
+          {
+            "local-exec": {
+              "command": "echo 'Servidor legacy migrado a IaC con variables: port, db_host, db_port'"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

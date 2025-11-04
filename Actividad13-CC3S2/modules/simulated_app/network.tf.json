@@ -11,6 +11,19 @@
         "default": "lab-net",
         "description": "Nombre de la red local"
       }
+    ],
+    "port": [
+      {
+        "default": "8080",
+        "description": "Puerto de la aplicación"
+      }
+    ],
+    "api_key": [
+      {
+        "type": "string",
+        "description": "API Key sensible",
+        "sensitive": true
+      }
     ]
   }
 }

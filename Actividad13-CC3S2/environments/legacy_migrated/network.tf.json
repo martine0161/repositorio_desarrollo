@@ -1,0 +1,22 @@
+{
+  "variable": {
+    "port": [
+      {
+        "default": "8080",
+        "description": "Variable migrada desde legacy: PORT"
+      }
+    ],
+    "db_host": [
+      {
+        "default": "localhost",
+        "description": "Variable migrada desde legacy: DB_HOST"
+      }
+    ],
+    "db_port": [
+      {
+        "default": "5432",
+        "description": "Variable migrada desde legacy: DB_PORT"
+      }
+    ]
+  }
+}
