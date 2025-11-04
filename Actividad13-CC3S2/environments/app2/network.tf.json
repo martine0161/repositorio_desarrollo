@@ -2,14 +2,20 @@
   "variable": {
     "app_name": [
       {
-        "default": "app1",
-        "description": "Nombre de la aplicación"
+        "default": "app2",
+        "description": "Nombre de la aplicaci\u00f3n app2"
       }
     ],
     "network": [
       {
-        "default": "lab-net",
-        "description": "Nombre de la red local"
+        "default": "net2",
+        "description": "Red para app2"
+      }
+    ],
+    "port": [
+      {
+        "default": "8081",
+        "description": "Puerto de la aplicaci\u00f3n"
       }
     ]
   }

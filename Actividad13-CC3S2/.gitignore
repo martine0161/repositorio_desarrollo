@@ -5,3 +5,8 @@
 __pycache__/
 *.pyc
 .env
+# Archivos sensibles
+secure.json
+*secure.json
+%USERPROFILE%*
+.config/secure.json

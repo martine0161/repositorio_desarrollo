@@ -2,19 +2,19 @@
   "variable": {
     "app_name": [
       {
-        "default": "app1",
-        "description": "Nombre de la aplicaci\u00f3n app1"
+        "default": "staging2",
+        "description": "Nombre de la aplicaci\u00f3n staging2"
       }
     ],
     "network": [
       {
-        "default": "net1",
-        "description": "Red para app1"
+        "default": "net2",
+        "description": "Red para staging2"
       }
     ],
     "port": [
       {
-        "default": "8080",
+        "default": "3001",
         "description": "Puerto de la aplicaci\u00f3n"
       }
     ]

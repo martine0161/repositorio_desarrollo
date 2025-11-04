@@ -1,15 +1,16 @@
 {
   "resource": {
     "null_resource": {
-      "app1": {
+      "local_server": {
         "triggers": {
           "name": "${var.app_name}",
-          "network": "${var.network}"
+          "network": "${var.network}",
+          "port": "${var.port}"
         },
         "provisioner": [
           {
             "local-exec": {
-              "command": "echo 'Desplegando app1 en net1'"
+              "command": "echo 'Desplegando app1 en net1:8080'"
             }
           }
         ]

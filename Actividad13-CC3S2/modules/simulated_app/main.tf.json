@@ -14,6 +14,36 @@
             }
           }
         ]
+      },
+      "local_server_replica": {
+        "triggers": {
+          "name": "${var.app_name}-replica",
+          "network": "${var.network}",
+          "port": "${var.port}"
+        },
+        "provisioner": [
+          {
+            "local-exec": {
+              "command": "echo 'Desplegando replica de ${var.app_name}'"
+            }
+          }
+        ]
+      },
+      "load_balancer": {
+        "depends_on": [
+          "null_resource.local_server",
+          "null_resource.local_server_replica"
+        ],
+        "triggers": {
+          "servers": "local_server,local_server_replica"
+        },
+        "provisioner": [
+          {
+            "local-exec": {
+              "command": "echo 'Load balancer configurado para ${var.app_name}'"
+            }
+          }
+        ]
       }
     }
   }

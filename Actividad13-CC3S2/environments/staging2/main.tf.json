@@ -10,7 +10,7 @@
         "provisioner": [
           {
             "local-exec": {
-              "command": "echo 'Desplegando app2 en net2:8081'"
+              "command": "echo 'Desplegando staging2 en net2:3001'"
             }
           }
         ]

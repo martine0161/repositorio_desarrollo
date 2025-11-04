@@ -1,0 +1,18 @@
+repos:
+  - repo: local
+    hooks:
+      - id: jq-check
+        name: Check JSON formatting
+        entry: jq
+        args: ['.', '--exit-status']
+        language: system
+        files: \.json$
+        
+      - id: validate-terraform-json
+        name: Validate Terraform JSON
+        entry: python
+        args: ['scripts/validate_schema.py']
+        language: system
+        pass_filenames: false
+        files: \.json$
+        always_run: false
