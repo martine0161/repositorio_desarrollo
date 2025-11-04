@@ -1,0 +1,19 @@
+{
+  "resource": {
+    "null_resource": {
+      "app1": {
+        "triggers": {
+          "name": "${var.app_name}",
+          "network": "${var.network}"
+        },
+        "provisioner": [
+          {
+            "local-exec": {
+              "command": "echo 'Desplegando ${var.app_name} en ${var.network}'"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

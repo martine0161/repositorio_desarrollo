@@ -1,0 +1,16 @@
+{
+  "variable": {
+    "app_name": [
+      {
+        "default": "app1",
+        "description": "Nombre de la aplicación"
+      }
+    ],
+    "network": [
+      {
+        "default": "lab-net",
+        "description": "Nombre de la red local"
+      }
+    ]
+  }
+}
