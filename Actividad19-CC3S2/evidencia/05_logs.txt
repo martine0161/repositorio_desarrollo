@@ -1,0 +1,4 @@
+INFO:     172.17.0.1:60104 - "GET /health HTTP/1.1" 200 OK
+INFO:     172.17.0.1:60114 - "GET /api/items HTTP/1.1" 200 OK
+INFO:     172.17.0.1:50502 - "POST /api/items HTTP/1.1" 201 Created
+INFO:     172.17.0.1:49104 - "GET /api/items HTTP/1.1" 200 OK

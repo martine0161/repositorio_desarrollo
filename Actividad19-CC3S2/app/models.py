@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, DateTime
 from datetime import datetime
 from pydantic import BaseModel
-from .database import Base
+from database import Base
 
 # SQLAlchemy model
 class ItemDB(Base):

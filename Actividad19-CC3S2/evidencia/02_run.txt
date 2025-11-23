@@ -1,1 +1,2 @@
-CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+CONTAINER ID   IMAGE                        COMMAND                  CREATED          STATUS          PORTS                                     NAMES
+43d120ddf4ba   ejemplo-microservice:0.1.0   "python -m uvicorn m…"   13 seconds ago   Up 11 seconds   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   ejemplo-ms

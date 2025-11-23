@@ -24,8 +24,10 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 # Copiar dependencias desde builder
 COPY --from=builder /root/.local /home/appuser/.local
 
-# Copiar código de la aplicación
+# Copiar código
 COPY --chown=appuser:appuser ./app /app
+COPY --chown=appuser:appuser ./tests /app/tests
+COPY --chown=appuser:appuser pytest.ini /app/
 
 USER appuser
 

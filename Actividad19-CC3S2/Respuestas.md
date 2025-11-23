@@ -139,39 +139,40 @@ docker run ejemplo-ms:0.1.0
 
 ### 4. Comandos ejecutados y evidencias
 
+**Nota importante:** Se utilizó el puerto **8080** en lugar de 80 en el host porque el puerto 80 estaba ocupado por nginx en el sistema. El contenedor internamente sigue usando el puerto 80 como se requiere.
 ```bash
 # Build
 docker build --no-cache -t ejemplo-microservice:0.1.0 .
 # Output: Successfully built, tagged ejemplo-microservice:0.1.0
 
-# Run (puerto 80 mapeado a 80)
-docker run --rm -d --name ejemplo-ms -p 80:80 ejemplo-microservice:0.1.0
+# Run (puerto 8080:80 debido a conflicto con nginx local)
+docker run --rm -d --name ejemplo-ms -p 8080:80 ejemplo-microservice:0.1.0
 
 # Health check
-curl -i http://localhost/health
-# Output: HTTP/1.1 200 OK, {"status": "healthy"}
+curl -i http://localhost:8080/health
+# Output: HTTP/1.1 200 OK, {"status":"healthy"}
 
 # Test GET items
-curl -i http://localhost/api/items
+curl -i http://localhost:8080/api/items
 # Output: HTTP/1.1 200 OK, []
 
 # Test POST item
-curl -X POST http://localhost/api/items \
+curl -X POST http://localhost:8080/api/items \
   -H "Content-Type: application/json" \
-  -d '{"name":"Item1","description":"Test item"}'
-# Output: 201 Created, item con id
+  -d '{"name":"Item1","description":"Test"}'
+# Output: 201 Created, {"id":1,"name":"Item1",...}
 
 # Verificar persistencia
-curl http://localhost/api/items
+curl http://localhost:8080/api/items
 # Output: [{"id":1,"name":"Item1",...}]
 
 # Logs
 docker logs -n 200 ejemplo-ms
-# Output: Uvicorn running, Application startup complete
+# Output: Uvicorn running, peticiones HTTP registradas
 
-# Tests
-pytest -q
-# Output: .... 4 passed in 0.5s
+# Tests (dentro del contenedor)
+docker exec ejemplo-ms pytest -q
+# Output: 5 passed, 2 warnings in 0.92s
 ```
 
 ### 5. Makefile
