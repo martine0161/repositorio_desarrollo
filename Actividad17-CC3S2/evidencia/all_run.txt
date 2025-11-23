@@ -1,0 +1,63 @@
+=========================================
+FULL TEST SUITE - IaC Testing Pyramid
+=========================================
+
+[CLEANUP] Removing previous state...
+✓ Cleanup complete
+
+=========================================
+PHASE 1: UNIT TESTS
+=========================================
+Unit testing: network
+  ✓ Validation passed
+Unit testing: compute
+  ✓ Validation passed
+Unit testing: storage
+  ✓ Validation passed
+Unit testing: firewall
+  ✓ Validation passed
+Unit testing: dns
+  ✓ Validation passed
+
+Unit Tests: 5 passed, 0 failed
+
+=========================================
+PHASE 2: SMOKE & CONTRACT TESTS
+=========================================
+✗ Some smoke tests failed
+
+=========================================
+PHASE 3: INTEGRATION TESTS
+=========================================
+Testing module integration...
+  ✓ Integration plan succeeded
+  ✓ Output contracts verified
+
+Integration Tests: 2 passed, 0 failed
+
+=========================================
+PHASE 4: E2E TESTS
+=========================================
+Simulating E2E scenario...
+  ✓ Network layer configured
+  ✓ Compute instances ready
+  ✓ Storage accessible
+  ✓ Firewall rules applied
+  ✓ DNS records resolvable
+
+E2E Tests: 5 passed, 0 failed
+
+=========================================
+FINAL TEST SUMMARY
+=========================================
+
+Test Pyramid Results:
+  Unit Tests:        5 passed, 0 failed
+  Smoke Tests:       0 passed, 1 failed
+  Integration Tests: 2 passed, 0 failed
+  E2E Tests:         5 passed, 0 failed
+
+Total: 12 passed, 1 failed
+Duration: 67s
+
+❌ Test suite FAILED

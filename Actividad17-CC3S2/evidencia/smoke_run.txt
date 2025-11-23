@@ -1,0 +1,66 @@
+=========================================
+SMOKE TESTS - Infrastructure as Code
+=========================================
+
+Testing module: network
+-----------------------------------------
+  [1/4] Checking format...
+    ✗ Format FAILED
+  [2/4] Validating syntax...
+    ✓ Validation OK
+  [3/4] Running plan...
+    ✗ Plan FAILED or TIMEOUT
+  [4/4] Checking contract...
+    ✓ Contract OK (5 outputs defined)
+
+Testing module: compute
+-----------------------------------------
+  [1/4] Checking format...
+    ✗ Format FAILED
+  [2/4] Validating syntax...
+    ✓ Validation OK
+  [3/4] Running plan...
+    ✗ Plan FAILED or TIMEOUT
+  [4/4] Checking contract...
+    ✓ Contract OK (3 outputs defined)
+
+Testing module: storage
+-----------------------------------------
+  [1/4] Checking format...
+    ✗ Format FAILED
+  [2/4] Validating syntax...
+    ✓ Validation OK
+  [3/4] Running plan...
+    ✗ Plan FAILED or TIMEOUT
+  [4/4] Checking contract...
+    ✓ Contract OK (4 outputs defined)
+
+Testing module: firewall
+-----------------------------------------
+  [1/4] Checking format...
+    ✗ Format FAILED
+  [2/4] Validating syntax...
+    ✓ Validation OK
+  [3/4] Running plan...
+    ✗ Plan FAILED or TIMEOUT
+  [4/4] Checking contract...
+    ✓ Contract OK (3 outputs defined)
+
+Testing module: dns
+-----------------------------------------
+  [1/4] Checking format...
+    ✗ Format FAILED
+  [2/4] Validating syntax...
+    ✓ Validation OK
+  [3/4] Running plan...
+    ✗ Plan FAILED or TIMEOUT
+  [4/4] Checking contract...
+    ✓ Contract OK (4 outputs defined)
+
+=========================================
+SMOKE TEST SUMMARY
+=========================================
+Passed: 10
+Failed: 10
+Duration: 61s
+

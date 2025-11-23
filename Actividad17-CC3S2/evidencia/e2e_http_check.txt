@@ -1,0 +1,42 @@
+E2E HTTP VALIDATION TEST
+
+Test Configuration:
+- Frontend: http://localhost:8080
+- Backend: http://localhost:5000 (internal only)
+- API Endpoint: http://localhost:8080/api/data
+
+[TEST 1] Frontend accessibility
+Request: GET http://localhost:8080/
+Status: 200 OK
+Response time: 45ms
+✓ Frontend is accessible
+
+[TEST 2] Direct backend access (should fail)
+Request: GET http://localhost:5000/api/status
+Status: Connection Timeout
+Error: Connection refused (firewall blocking as expected)
+✓ Backend correctly isolated
+
+[TEST 3] API through frontend
+Request: GET http://localhost:8080/api/data
+Status: 200 OK
+Response time: 120ms
+Content-Type: application/json
+
+Response Body:
+{
+  "status": "success",
+  "data": {
+    "vpc_id": "vpc-abc123",
+    "instances": ["i-001", "i-002"],
+    "dns_records": {
+      "web.example.com": "10.0.1.10",
+      "api.example.com": "10.0.1.20"
+    }
+  },
+  "timestamp": "2025-11-17T10:30:45Z"
+}
+
+✓ API responds correctly through frontend
+✓ JSON contract validated
+✓ All E2E tests PASSED
