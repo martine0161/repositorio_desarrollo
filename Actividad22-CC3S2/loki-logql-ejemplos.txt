@@ -1,0 +1,99 @@
+# LogQL Queries - Actividad 22
+# Loki - Sistema de agregación de logs
+
+## Queries Básicas con Labels
+
+# Todos los logs del servicio demo-app
+{job="demo-app"}
+
+## Filtros por Contenido (Line Filters)
+
+# Logs que contienen "ERROR"
+{job="demo-app"} |= "ERROR"
+
+# Logs que contienen "WARNING"
+{job="demo-app"} |= "WARNING"
+
+# Logs que contienen "INFO"
+{job="demo-app"} |= "INFO"
+
+# Logs relacionados con endpoint específico
+{job="demo-app"} |= "/api/v1/error"
+{job="demo-app"} |= "/api/v1/items"
+{job="demo-app"} |= "Health check"
+
+## Filtros Negativos
+
+# Logs de error excluyendo health checks
+{job="demo-app"} |= "ERROR" != "healthz"
+
+# Logs sin mensajes de info
+{job="demo-app"} != "INFO"
+
+## Expresiones Regulares
+
+# Logs que coinciden con patrón regex (case insensitive)
+{job="demo-app"} |~ "(?i)error|fail|exception"
+
+# Logs que NO coinciden con patrón
+{job="demo-app"} !~ "Health.*"
+
+## Múltiples Filtros
+
+# ERROR y api combinados
+{job="demo-app"} |= "ERROR" |= "Simulated"
+
+# Warnings o Errors
+{job="demo-app"} |~ "ERROR|WARNING"
+
+## Funciones de Agregación (Metric Queries)
+
+# Conteo de errores en ventana de 5 minutos
+count_over_time({job="demo-app"} |= "ERROR" [5m])
+
+# Conteo de todos los logs en 1 minuto
+count_over_time({job="demo-app"} [1m])
+
+# Tasa de logs de error por segundo
+rate({job="demo-app"} |= "ERROR" [1m])
+
+# Suma de errores por nivel
+sum by (level) (count_over_time({job="demo-app"} | pattern "<_> <level> <_>" [5m]))
+
+## Extracción de Campos
+
+# Usando pattern para extraer campos
+{job="demo-app"} | pattern "<timestamp> <level> <message>"
+
+# Usando regex para extraer
+{job="demo-app"} | regexp "(?P<timestamp>\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2},\\d{3}) (?P<level>\\w+) (?P<message>.*)"
+
+## Queries de Seguridad
+
+# Detectar posible SQL injection
+{job="demo-app"} |~ "(?i)(select.*from|union.*select|drop.*table)"
+
+# Detectar acceso a paths sospechosos
+{job="demo-app"} |~ "/\\.\\./|/etc/passwd|/proc/"
+
+## Queries para Alertas
+
+# Detectar errores críticos (más de 5 en 5 minutos)
+count_over_time({job="demo-app"} |= "ERROR" [5m]) > 5
+
+# Detectar excepciones
+count_over_time({job="demo-app"} |= "Exception" [5m]) > 0
+
+## Ejemplos de Logs Reales del Stack
+
+# Log de health check:
+# 2025-12-11 04:25:18,100 INFO Health check OK
+
+# Log de items:
+# 2025-12-11 04:25:19,200 INFO Listing items
+
+# Log de error simulado:
+# 2025-12-11 04:25:31,107 ERROR Simulated error endpoint called
+
+# Log de warning:
+# 2025-12-11 04:25:45,300 WARNING Slow request simulated

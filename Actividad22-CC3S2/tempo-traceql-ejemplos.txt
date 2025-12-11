@@ -1,0 +1,109 @@
+# TraceQL Queries - Actividad 22
+# Tempo - Backend de trazas distribuidas
+
+## Queries Básicas
+
+# Todas las trazas de un servicio
+{ service.name = "demo-app" }
+
+# Buscar traza por ID específico
+{ trace:id = "abc123def456789" }
+
+## Filtros por Atributos HTTP
+
+# Trazas de requests GET
+{ service.name = "demo-app" && http.method = "GET" }
+
+# Trazas a endpoint específico
+{ service.name = "demo-app" && http.target = "/api/v1/items" }
+{ service.name = "demo-app" && http.target = "/api/v1/error" }
+{ service.name = "demo-app" && http.target = "/healthz" }
+
+# Alternativas de atributos (depende de instrumentación)
+{ service.name = "demo-app" && http.route = "/api/v1/items" }
+{ service.name = "demo-app" && url.path = "/api/v1/items" }
+
+# Trazas con código de estado específico
+{ service.name = "demo-app" && http.status_code = 200 }
+{ service.name = "demo-app" && http.status_code = 500 }
+{ service.name = "demo-app" && http.status_code >= 400 }
+
+## Filtros por Duración
+
+# Trazas lentas (más de 500ms)
+{ service.name = "demo-app" && duration > 500ms }
+
+# Trazas muy rápidas (menos de 10ms)
+{ service.name = "demo-app" && duration < 10ms }
+
+# Rango de duración
+{ service.name = "demo-app" && duration > 100ms && duration < 1s }
+
+## Filtros por Status
+
+# Trazas con error
+{ service.name = "demo-app" && status = error }
+
+# Trazas exitosas
+{ service.name = "demo-app" && status = ok }
+
+## Filtros por Nombre de Span
+
+# Spans específicos definidos en la app
+{ name = "list_items" }
+{ name = "cpu_bound_work" }
+{ name = "error_endpoint" }
+
+# Spans que coinciden con patrón
+{ name =~ ".*items.*" }
+
+## Combinaciones Avanzadas
+
+# Errores en endpoint específico
+{ service.name = "demo-app" && http.target = "/api/v1/error" && status = error }
+
+# Requests lentas exitosas (posible optimización)
+{ service.name = "demo-app" && duration > 500ms && status = ok }
+
+# GET requests con errores
+{ service.name = "demo-app" && http.method = "GET" && http.status_code >= 500 }
+
+## Queries de Seguridad
+
+# Requests a endpoints administrativos
+{ service.name = "demo-app" && http.target =~ "/admin.*" }
+
+# Requests con autenticación fallida
+{ service.name = "demo-app" && http.status_code = 401 }
+
+# Requests bloqueados
+{ service.name = "demo-app" && http.status_code = 403 }
+
+## Atributos Personalizados
+
+# El span cpu_bound_work tiene un atributo personalizado:
+# span.set_attribute("work.result", total)
+{ span.work.result > 0 }
+
+## Notas sobre este Stack
+
+# En este stack, los spans tienen estos nombres:
+# - Span raíz: GET /api/v1/items (auto-instrumentación FastAPI)
+# - Spans hijos: list_items, cpu_bound_work, error_endpoint (manuales)
+#
+# La instrumentación de FastAPI agrega automáticamente:
+# - http.method
+# - http.url
+# - http.status_code
+# - http.target (path)
+# - net.peer.ip
+
+## Verificación con MCP Server
+
+# El MCP Server reportó 48 trazas recientes:
+# curl http://localhost:8080/api/traces-summary
+# {
+#   "recent_traces": 48,
+#   "error_traces": 0,
+#   "notes": "Conteo aproximado basado en la API HTTP de Tempo"
+# }

@@ -1,0 +1,136 @@
+# Comandos Utilizados - Actividad 22
+# Observabilidad y Telemetría con Prometheus, Loki, Tempo y MCP
+
+## Verificación de Requisitos
+
+docker --version
+docker compose version
+python --version
+make --version
+
+## Preparación del Entorno
+
+# Navegar al directorio del proyecto
+cd Observabilidad-mcp
+
+# Crear entorno virtual
+python -m venv bdd
+
+# Activar entorno virtual
+source bdd/bin/activate          # Linux/WSL/macOS/Git Bash
+# .\bdd\Scripts\Activate.ps1     # PowerShell Windows
+
+# Instalar dependencias
+make deps
+
+## Levantar el Stack
+
+# Levantar todos los servicios
+make up
+
+# Verificar contenedores corriendo
+docker ps
+
+## Generar Tráfico
+
+# Opción 1: Usando make (puede fallar si hay espacios en la ruta)
+make demo-traffic
+
+# Opción 2: Script directo
+bash ./scripts/demo-traffic.sh
+
+# Opción 3: Loop manual (funciona siempre)
+for i in {1..20}; do
+  curl -s http://localhost:8000/healthz > /dev/null
+  curl -s http://localhost:8000/api/v1/items > /dev/null
+  curl -s http://localhost:8000/api/v1/work > /dev/null
+  curl -s http://localhost:8000/api/v1/error > /dev/null
+  sleep 0.3
+done
+
+# Opción 4: Comandos individuales
+curl http://localhost:8000/healthz
+curl http://localhost:8000/api/v1/items
+curl http://localhost:8000/api/v1/work
+curl http://localhost:8000/api/v1/error
+
+## Verificación de Servicios
+
+# App FastAPI
+curl http://localhost:8000/healthz
+curl http://localhost:8000/api/v1/items
+
+# MCP Server - Resumen unificado
+curl http://localhost:8080/api/summary
+
+# MCP Server - Solo métricas
+curl http://localhost:8080/api/metrics-summary
+
+# MCP Server - Solo logs
+curl http://localhost:8080/api/logs-summary
+
+# MCP Server - Solo trazas
+curl http://localhost:8080/api/traces-summary
+
+## Ver Logs de Contenedores
+
+# Logs de la app
+docker logs demo-app
+
+# Logs del OTEL Collector
+docker logs otel-collector
+
+# Logs de Promtail
+docker logs promtail
+
+# Logs en tiempo real (follow)
+docker compose logs -f app
+
+## URLs de Acceso
+
+# App FastAPI (Swagger)
+http://localhost:8000/docs
+
+# Grafana
+http://localhost:3000
+# Usuario: admin
+# Password: devsecops
+
+# Prometheus
+http://localhost:9090
+
+# MCP Server (Swagger)
+http://localhost:8080/docs
+
+## Apagar el Stack
+
+# Detener contenedores
+make down
+
+# Detener y eliminar volúmenes
+docker compose down -v
+
+## Tests y Escaneos (Opcional)
+
+# Ejecutar tests
+make test
+
+# Escaneo de seguridad Python
+make scan-python
+
+# Escaneo de imagen Docker
+make scan-image
+
+## Git - Commits de la Actividad
+
+# Agregar archivos
+git add .
+
+# Commit inicial
+git commit -m "Actividad22: estructura inicial y documentación"
+
+# Push
+git push origin main
+
+# Verificar estado
+git status
