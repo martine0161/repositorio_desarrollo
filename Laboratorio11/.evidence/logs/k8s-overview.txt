@@ -1,0 +1,12 @@
+NAME                            READY   UP-TO-DATE   AVAILABLE   AGE     CONTAINERS      IMAGES                SELECTOR
+deployment.apps/order-service   1/1     1            1           3m24s   order-service   order-service:lab11   app=order-service
+deployment.apps/user-service    1/1     1            1           3m24s   user-service    user-service:lab11    app=user-service
+
+NAME                    TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE     SELECTOR
+service/kubernetes      ClusterIP   10.96.0.1       <none>        443/TCP    6m44s   <none>
+service/order-service   ClusterIP   10.110.60.135   <none>        8001/TCP   3m24s   app=order-service
+service/user-service    ClusterIP   10.106.52.123   <none>        8000/TCP   3m24s   app=user-service
+
+NAME                                 READY   STATUS    RESTARTS   AGE     IP           NODE       NOMINATED NODE   READINESS GATES
+pod/order-service-58499fdccd-89qcw   1/1     Running   0          3m24s   10.244.0.4   minikube   <none>           <none>
+pod/user-service-68c8467bd5-4g4f8    1/1     Running   0          3m24s   10.244.0.3   minikube   <none>           <none>
